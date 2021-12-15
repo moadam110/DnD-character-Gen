@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins/setup.sh"
             }
         }
         stage('Test') {
