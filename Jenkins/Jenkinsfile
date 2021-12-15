@@ -6,27 +6,27 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh "bash /var/lib/jenkins/workspace/$JOB_BASE_NAME"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
             }
         }
         stage('Test') {
             steps {
-                sh "bash /var/lib/jenkins/workspace/$JOB_BASE_NAME"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
             }
         }
         stage('Build') {
             steps {
-                sh "bash /var/lib/jenkins/workspace/$JOB_BASE_NAME"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
             }
         }
         stage('Push') {
             steps {
-                sh "bash /var/lib/jenkins/workspace/$JOB_BASE_NAME"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
             }
         }
         stage('Deploy') {
             steps {
-                sh "bash /var/lib/jenkins/workspace/$JOB_BASE_NAME"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
             }
         }
     }
