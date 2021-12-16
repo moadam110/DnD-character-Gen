@@ -11,22 +11,22 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins/test.sh"
             }
         }
         stage('Build') {
             steps {
-                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins/build.sh"
             }
         }
         stage('Push') {
             steps {
-                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins/push/sh"
             }
         }
         stage('Deploy') {
             steps {
-                sh "bash /home/azureuser/DnD-character-Gen/Jenkins"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins/deploy.sh"
             }
         }
     }
