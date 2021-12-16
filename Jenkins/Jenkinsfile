@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh "bash /home/azureuser/DnD-character-Gen/Jenkins/push/sh"
+                sh "bash /home/azureuser/DnD-character-Gen/Jenkins/push.sh"
             }
         }
         stage('Deploy') {
