@@ -26,11 +26,7 @@ version: '3.3'
 services:
   frontend:
     container_name: frontend
-    environment:
-      DATABASE_URI:
-      CREATE_SCHEMA:
     build: ./frontend
-    image: mohadam10/dnd-app-frontend:latest
     ports:
     - target: 5000
       published: 5000
