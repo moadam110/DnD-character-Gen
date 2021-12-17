@@ -26,12 +26,11 @@ version: '3.3'
 services:
   frontend:
     container_name: frontend
+    environment:
+      DATABASE_URI:
+      CREATE_SCHEMA:
     build: ./frontend
     image: mohadam10/dnd-app-frontend:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: db
-    restart: always
     ports:
     - target: 5000
       published: 5000
