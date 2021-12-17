@@ -27,6 +27,7 @@ services:
   frontend:
     container_name: frontend
     build: ./frontend
+    image: mohadam10/dnd-app-frontend:latest
     ports:
     - target: 5000
       published: 5000
