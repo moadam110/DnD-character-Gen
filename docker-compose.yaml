@@ -1,0 +1,74 @@
+# version: "3.8"
+# services:
+#   frontend:
+#     deploy:
+#       replicas: 3
+#     build: ./frontend
+#     image: ${DOCKER_HUB_CREDS_USR}/dnd-app-frontend:latest
+#     container_name: dnd-app-frontend
+#     ports:
+#     - target: 5000
+#       published: 80
+#   backend:
+#     deploy:
+#       replicas: 3
+#     build: ./backend
+#     image: ${DOCKER_HUB_CREDS_USR}/dnd-app-backend:latest
+#     container_name: dnd-app-backend
+#     environment:
+#       DATABASE_URI:
+#       CREATE_SCHEMA:
+#     ports:
+#     - target: 5000
+#       published: 5000
+
+version: '3.3'
+services:
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    image: susanadam/dnd-app-frontend:latest
+    ports:
+    - target: 5000
+      published: 5000
+      protocol: tcp
+  backend:
+    container_name: backend
+    build: ./backend
+    image: susanadam/dnd-app-backend:latest
+    ports:
+    - target: 5003
+      published: 5003
+  service1:
+    container_name: service1
+    build: ./service1
+    image: susanadam/dnd-app-service1:latest
+    ports:
+    - target: 5001
+      published: 5001
+  service2:
+    container_name: service2
+    build: ./service2
+    image: susanadam/dnd-app-service2:latest
+    ports:
+    - target: 5002
+      published: 5002
+  mysql_db_container:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: db
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_db_data_container:/var/lib/mysql
+
+volumes:
+  mysql_db_data_container:
+
+
+    
+    
+
