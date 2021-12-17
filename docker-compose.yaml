@@ -27,7 +27,7 @@ services:
   frontend:
     container_name: frontend
     build: ./frontend
-    image: mohadam10/dnd-app-frontend:latest
+    image: susanadam/dnd-app-frontend:latest
     ports:
     - target: 5000
       published: 5000
@@ -35,21 +35,21 @@ services:
   backend:
     container_name: backend
     build: ./backend
-    image: mohadam10/dnd-app-backend:latest
+    image: susanadam/dnd-app-backend:latest
     ports:
     - target: 5003
       published: 5003
   service1:
     container_name: service1
     build: ./service1
-    image: mohadam10/dnd-app-service1:latest
+    image: susanadam/dnd-app-service1:latest
     ports:
     - target: 5001
       published: 5001
   service2:
     container_name: service2
     build: ./service2
-    image: mohadam10/dnd-app-service2:latest
+    image: susanadam/dnd-app-service2:latest
     ports:
     - target: 5002
       published: 5002
