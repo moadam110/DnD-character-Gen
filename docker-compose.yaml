@@ -22,63 +22,53 @@
 #     - target: 5000
 #       published: 5000
 
-version: "3.3"
+version: '3.3'
 services:
   frontend:
+    container_name: frontend
     build: ./frontend
-    image: ${DOCKER_HUB_CREDS_USR}/dnd-app-frontend:latest
-    container_name: application
+    image: dockerjadon/python-frontend
     ports:
     - target: 5000
       published: 5000
-    deploy:
-      replicas: 1
-
+      protocol: tcp
   backend:
-    build: ./backend
-    image: ${DOCKER_HUB_CREDS_USR}/dnd-app-backend:latest
     container_name: backend
+    build: ./backend
+    image: dockerjadon/python-backend
     ports:
     - target: 5003
       published: 5003
-      protocol: tcp
-    deploy:
-      replicas: 1
-
   service1:
-    build: ./service1
-    image: ${DOCKER_HUB_CREDS_USR}/service1:latest
     container_name: service1
+    build: ./service1
+    image: dockerjadon/python-service1
     ports:
     - target: 5001
       published: 5001
-      protocol: tcp
-    deploy:
-      replicas: 1
-
   service2:
-    build: ./service2
-    image: ${DOCKER_HUB_CREDS_USR}/service2:latest
     container_name: service2
+    build: ./service2
+    image: dockerjadon/python-service2
     ports:
     - target: 5002
       published: 5002
-      protocol: tcp
-    deploy:
-      replicas: 1
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    ports:
-    - target: 80
-      published: 80
-      protocol: tcp
-    volumes:
-    - type: bind
-      source: .nginx/nginx.conf
-      target: /etc/nginx/nginx.conf
+  mysql_db_container:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: db
     restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_db_data_container:/var/lib/mysql
+
+volumes:
+  mysql_db_data_container:
+
+
     
     
 
