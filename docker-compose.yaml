@@ -1,23 +1,84 @@
-version: "3.8"
+# version: "3.8"
+# services:
+#   frontend:
+#     deploy:
+#       replicas: 3
+#     build: ./frontend
+#     image: ${DOCKER_HUB_CREDS_USR}/dnd-app-frontend:latest
+#     container_name: dnd-app-frontend
+#     ports:
+#     - target: 5000
+#       published: 80
+#   backend:
+#     deploy:
+#       replicas: 3
+#     build: ./backend
+#     image: ${DOCKER_HUB_CREDS_USR}/dnd-app-backend:latest
+#     container_name: dnd-app-backend
+#     environment:
+#       DATABASE_URI:
+#       CREATE_SCHEMA:
+#     ports:
+#     - target: 5000
+#       published: 5000
+
+version: "3.3"
 services:
   frontend:
-    deploy:
-      replicas: 3
     build: ./frontend
     image: ${DOCKER_HUB_CREDS_USR}/dnd-app-frontend:latest
-    container_name: dnd-app-frontend
-    ports:
-    - target: 5000
-      published: 80
-  backend:
-    deploy:
-      replicas: 3
-    build: ./backend
-    image: ${DOCKER_HUB_CREDS_USR}/dnd-app-backend:latest
-    container_name: dnd-app-backend
-    environment:
-      DATABASE_URI:
-      CREATE_SCHEMA:
+    container_name: application
     ports:
     - target: 5000
       published: 5000
+    deploy:
+      replicas: 1
+
+  backend:
+    build: ./backend
+    image: ${DOCKER_HUB_CREDS_USR}/dnd-app-backend:latest
+    container_name: backend
+    ports:
+    - target: 5003
+      published: 5003
+      protocol: tcp
+    deploy:
+      replicas: 1
+
+  service1:
+    build: ./service1
+    image:${DOCKER_HUB_CREDS_USR}/service1:latest
+    container_name: service1
+    ports:
+    - target: 5001
+      published: 5001
+      protocol: tcp
+    deploy:
+      replicas: 1
+
+  service2:
+    build: ./service2
+    image: ${DOCKER_HUB_CREDS_USR}/service2:latest
+    container_name: service2
+    ports:
+    - target: 5002
+      published: 5002
+      protocol: tcp
+    deploy:
+      replicas: 1
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+    - target: 80
+      published: 80
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: .nginx/nginx.conf
+      target: /etc/nginx/nginx.conf
+    restart: always
+    
+    
+
