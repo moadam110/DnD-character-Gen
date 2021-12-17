@@ -47,7 +47,7 @@ services:
 
   service1:
     build: ./service1
-    image:${DOCKER_HUB_CREDS_USR}/service1:latest
+    image: ${DOCKER_HUB_CREDS_USR}/service1:latest
     container_name: service1
     ports:
     - target: 5001
